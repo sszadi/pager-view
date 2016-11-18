@@ -1,4 +1,4 @@
-package com.hfad.viewpager;
+package com.hfad.viewpager.fragments;
 
 
 import android.os.Bundle;
@@ -7,13 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SecondFragment extends Fragment {
+import com.hfad.viewpager.R;
+
+public class ThirdFragment extends Fragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment2_layout, container, false);
+        View rootView = inflater.inflate(R.layout.fragment3_layout, container, false);
         return rootView;
     }
 
