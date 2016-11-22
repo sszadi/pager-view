@@ -3,13 +3,15 @@ package com.hfad.viewpager.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.hfad.viewpager.MainActivity;
@@ -23,20 +25,27 @@ import com.hfad.viewpager.rest.ApiInterface;
 import java.util.List;
 
 import butterknife.BindView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class FirstFragment extends Fragment {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String API_KEY = "6cd5301171754be7959375a986f18b14";
-    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
+    @BindView(R.id.progressBar)
+    ProgressBar progress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment1_layout, container, false);
+        RelativeLayout mainLayout = (RelativeLayout) inflater.inflate(R.layout.fragment1_layout, container, false);
+        recyclerView = (RecyclerView) mainLayout.findViewById(R.id.recycler_view);
+
+        //ButterKnife.bind(mainLayout, this);
 
         if (API_KEY.isEmpty()) {
             Toast.makeText(inflater.getContext(), "Please obtain your API KEY first", Toast.LENGTH_SHORT).show();
@@ -46,7 +55,7 @@ public class FirstFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<NewsResponse> call = apiService.getNews(API_KEY);
+        /*Call<NewsResponse> call = apiService.getNews(API_KEY);
 
         call.enqueue(new Callback<NewsResponse>() {
 
@@ -56,14 +65,40 @@ public class FirstFragment extends Fragment {
                 List<News> news = response.body().getResults();
                 recyclerView.setAdapter(new NewsAdapter(news, R.layout.list_news_layout, getContext()));
 
-s            }
+            }
 
             @Override
             public void onFailure(Call<NewsResponse> call, Throwable t) {
                 Log.e(TAG, t.toString());
             }
-        });
-        return recyclerView;
+        });*/
+
+        progress.setVisibility(View.VISIBLE);
+
+        apiService.getNewsRX(API_KEY)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<NewsResponse>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(NewsResponse newsResponse) {
+                        List<News> news = newsResponse.getResults();
+                        recyclerView.setAdapter(new NewsAdapter(news, R.layout.list_news_layout, getContext()));
+
+                        progress.setVisibility(View.GONE);
+                    }
+                });
+
+        return mainLayout;
     }
 
 }

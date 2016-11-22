@@ -5,8 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hfad.viewpager.R;
@@ -14,11 +12,8 @@ import com.hfad.viewpager.model.News;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.BindViews;
 
-
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>{
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     private List<News> news;
     private int rowLayout;
@@ -33,15 +28,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
         public NewsViewHolder(View itemView) {
             super(itemView);
-            headLine = (TextView)  itemView.findViewById(R.id.headline);
-            data = (TextView)  itemView.findViewById(R.id.publication_date);
-            summary = (TextView)  itemView.findViewById(R.id.summary_short);
-            url = (TextView)  itemView.findViewById(R.id.url);
+            headLine = (TextView) itemView.findViewById(R.id.headline);
+            data = (TextView) itemView.findViewById(R.id.publication_date);
+            summary = (TextView) itemView.findViewById(R.id.summary_short);
+            url = (TextView) itemView.findViewById(R.id.url);
 
         }
     }
 
-    public NewsAdapter(List<News> news, int rowLayout, Context context){
+    public NewsAdapter(List<News> news, int rowLayout, Context context) {
         this.news = news;
         this.rowLayout = rowLayout;
         this.context = context;
@@ -58,7 +53,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
         holder.headLine.setText(news.get(position).getHeadline());
         holder.data.setText(news.get(position).getPublicationDate());
         holder.summary.setText(news.get(position).getSummaryShort());
-        holder.url.setText(news.get(position).getUrl());
+        holder.url.setText(news.get(position).getLink().getUrl());
     }
 
     @Override

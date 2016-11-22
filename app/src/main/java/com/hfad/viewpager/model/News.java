@@ -1,5 +1,7 @@
 package com.hfad.viewpager.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Niki on 2016-11-17.
  */
@@ -7,14 +9,16 @@ package com.hfad.viewpager.model;
 public class News {
 
     private String headline;
+    @SerializedName("summary_short")
     private String summaryShort;
-    private String url;
+    private Link link;
+    @SerializedName("publication_date")
     private String publicationDate;
 
-    public News(String headline, String summaryShort, String url, String publicationDate) {
+    public News(String headline, String summaryShort, Link link, String publicationDate) {
         this.headline = headline;
         this.summaryShort = summaryShort;
-        this.url = url;
+        this.link = link;
         this.publicationDate = publicationDate;
     }
 
@@ -42,11 +46,11 @@ public class News {
         this.summaryShort = summaryShort;
     }
 
-    public String getUrl() {
-        return url;
+    public Link getLink() {
+        return link;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setLink(Link link) {
+        this.link = link;
     }
 }
