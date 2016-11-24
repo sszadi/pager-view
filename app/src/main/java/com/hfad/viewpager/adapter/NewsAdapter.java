@@ -5,17 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hfad.viewpager.R;
 import com.hfad.viewpager.model.News;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.BindViews;
 
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>{
@@ -57,7 +52,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(NewsViewHolder holder, final int position) {
         holder.headLine.setText(news.get(position).getHeadline());
         holder.data.setText(news.get(position).getPublicationDate());
-        holder.summary.setText(news.get(position).getSummaryShort());
+        holder.summary.setText(news.get(position).getSummary());
         holder.url.setText(news.get(position).getUrl());
     }
 

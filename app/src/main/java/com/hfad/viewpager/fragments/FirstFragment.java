@@ -29,7 +29,6 @@ import retrofit2.Response;
 
 public class FirstFragment extends Fragment {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
     private static final String API_KEY = "6cd5301171754be7959375a986f18b14";
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
 
@@ -56,11 +55,11 @@ public class FirstFragment extends Fragment {
                 List<News> news = response.body().getResults();
                 recyclerView.setAdapter(new NewsAdapter(news, R.layout.list_news_layout, getContext()));
 
-s            }
+           }
 
             @Override
             public void onFailure(Call<NewsResponse> call, Throwable t) {
-                Log.e(TAG, t.toString());
+                Log.e(MainActivity.class.getSimpleName(), t.toString());
             }
         });
         return recyclerView;
