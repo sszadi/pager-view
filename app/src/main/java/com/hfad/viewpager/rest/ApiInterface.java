@@ -15,12 +15,8 @@ public interface ApiInterface {
     @GET("reviews/search.json")
     Observable<NewsResponse> getNewsRX(@Query("api_key") String api_key);
 
-<<<<<<< HEAD
-    //@GET("news/{headline}")
-    //Call<NewsResponse> getNewsDetails(@Path("headline") int id, @Query("api_key") String apiKey);
+    @GET("json?address={address}&key={api_key}")
+    Observable<NewsResponse> getNewsDetails(@Path("address") String address, @Query("api_key") String apiKey);
 
-=======
-    @GET("news/{headline}")
-    Call<NewsResponse> getNewsDetails(@Path("headline") int id, @Query("api_key") String apiKey);
->>>>>>> refs/remotes/origin/master
+
 }

@@ -13,11 +13,8 @@ import com.hfad.viewpager.model.News;
 import java.util.List;
 
 
-<<<<<<< HEAD
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>{
-=======
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
->>>>>>> refs/remotes/origin/master
+
 
     private List<News> news;
     private int rowLayout;
@@ -56,13 +53,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
     public void onBindViewHolder(NewsViewHolder holder, final int position) {
         holder.headLine.setText(news.get(position).getHeadline());
         holder.data.setText(news.get(position).getPublicationDate());
-<<<<<<< HEAD
+
         holder.summary.setText(news.get(position).getSummary());
-        holder.url.setText(news.get(position).getUrl());
-=======
-        holder.summary.setText(news.get(position).getSummaryShort());
         holder.url.setText(news.get(position).getLink().getUrl());
->>>>>>> refs/remotes/origin/master
+
+        holder.summary.setText(news.get(position).getSummary());
+        holder.url.setText(news.get(position).getLink().getUrl());
+
     }
 
     @Override

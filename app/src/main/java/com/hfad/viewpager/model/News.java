@@ -9,27 +9,16 @@ import com.google.gson.annotations.SerializedName;
 public class News {
 
     private String headline;
-<<<<<<< HEAD
-    private String summary;
-    private String url;
-    private String publicationDate;
-
-    public News(String headline, String summary, String url, String publicationDate) {
-        this.headline = headline;
-        this.summary = summary;
-        this.url = url;
-=======
     @SerializedName("summary_short")
-    private String summaryShort;
+    private String summary;
     private Link link;
     @SerializedName("publication_date")
     private String publicationDate;
 
     public News(String headline, String summaryShort, Link link, String publicationDate) {
         this.headline = headline;
-        this.summaryShort = summaryShort;
+        this.summary = summaryShort;
         this.link = link;
->>>>>>> refs/remotes/origin/master
         this.publicationDate = publicationDate;
     }
 
@@ -45,17 +34,12 @@ public class News {
         return publicationDate;
     }
 
-<<<<<<< HEAD
-    public String getUrl() {
-        return url;
-    }
-=======
-    public void setPublicationDate(String publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
-    public void setSummaryShort(String summaryShort) {
-        this.summaryShort = summaryShort;
+    public void setHeadline(String headline) {
+        this.headline = headline;
     }
 
     public Link getLink() {
@@ -65,5 +49,8 @@ public class News {
     public void setLink(Link link) {
         this.link = link;
     }
->>>>>>> refs/remotes/origin/master
+
+    public void setPublicationDate(String publicationDate) {
+        this.publicationDate = publicationDate;
+    }
 }
