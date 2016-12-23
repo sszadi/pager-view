@@ -39,8 +39,6 @@ public class MainActivity extends FragmentActivity {
         ButterKnife.bind(this);
 
         viewPager.setAdapter(new CustomPagerAdapter(getSupportFragmentManager()));
-
-
     }
 
     private class CustomPagerAdapter extends FragmentPagerAdapter {
